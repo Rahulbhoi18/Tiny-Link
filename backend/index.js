@@ -2,9 +2,10 @@ import dotenv from "dotenv"
 dotenv.config();
 import express from "express";
 import cors from "cors";
-import {nanoid} from "nanoid"
+
 import connectDB from "./src/config/mongo.config.js";
-import { URL } from "./src/models/shorturl.model.js";
+import { URL } from "./src/models/short_url.model.js";
+import urlRouter from "./src/routes/short_url.routes.js";
 
 const app = express();
 app.use(cors({
@@ -13,21 +14,12 @@ app.use(cors({
 app.use(express.json()); // for data parsing
 app.use(express.urlencoded({extended : true}));
 
-app.post("/api/create",(req,res)=>{
-    const {url} = req.body
-    const short_url= nanoid(7)
-    const newURL = new URL({
-        full_url:url,
-        short_url:short_url
-    })
-    newURL.save()
-    res.send(nanoid(7))
-})
+app.use("/api/create",urlRouter)
 
 app.get("/:id",async (req,res)=> {
     const {id} = req.params
     const url = await URL.findOne({short_url:id})
-   
+   console.log(url.full_url);
     if(url){
         res.redirect(url.full_url)
     }else{
