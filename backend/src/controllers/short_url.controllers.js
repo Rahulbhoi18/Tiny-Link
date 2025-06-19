@@ -1,6 +1,6 @@
-import { getShortUrl } from "../dao/short_url.js";
-import { createShortUrlWithoutUser } from "../services/short_url.service.js";
-import wrapAsync from "../utils/tryCatchWrapper.js";
+import { getShortUrl } from '../dao/short_url.js';
+import { createShortUrlWithoutUser } from '../services/short_url.service.js';
+import wrapAsync from '../utils/tryCatchWrapper.js';
 
 export const createshorturl = wrapAsync(async (req, res, next) => {
   try {
@@ -14,9 +14,9 @@ export const createshorturl = wrapAsync(async (req, res, next) => {
 export const redirectFromShortUrl = wrapAsync(async (req, res, next) => {
   const { id } = req.params;
   const url = await getShortUrl(id);
-  if (url) { 
+  if (url) {
     res.redirect(url.full_url);
   } else {
-    throw new Error("Short url not found");
+    throw new Error('Short url not found');
   }
 });
