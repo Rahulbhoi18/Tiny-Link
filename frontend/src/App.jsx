@@ -8,8 +8,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Copy, Link, BarChart3, Calendar, ExternalLink, Trash2 } from "lucide-react"
 import { toast } from "sonner"
-
+import axios from "axios"
 const URLShortenerComponent = ({ handleShorten, url, setUrl, isLoading }) => {
+  const [isLoading , setIsLoading] = useState(false);
   return (
     <div className="max-w-4xl mx-auto mb-8 shadow-2xl py-5">
       <CardHeader>
