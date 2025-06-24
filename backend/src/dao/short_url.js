@@ -4,7 +4,7 @@ export const saveShortUrl = async (shortUrl, longurl, userId) => {
   try {
     const newUrl = new URL({
       full_url: longurl,
-      short_url: 'AjHkXRw',
+      short_url: shortUrl,
     });
     if (userId) {
       newUrl.user_id = userId;
