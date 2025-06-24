@@ -1,12 +1,16 @@
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import { StrictMode } from 'react'
-import { Toaster } from './components/ui/sonner'
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { StrictMode } from "react";
+import { Toaster } from "./components/ui/sonner";
+import { QueryClientProvider , QueryClient } from "@tanstack/react-query";
 
-createRoot(document.getElementById('root')).render(
+const queryClient = QueryClient();
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
-    <Toaster/>
+    <QueryClientProvider client={queryClient}>
+      <App />
+      <Toaster />
+    </QueryClientProvider>
   </StrictMode>
-)
+);
